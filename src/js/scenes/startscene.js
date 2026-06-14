@@ -25,7 +25,7 @@ export class StartScene extends Scene {
             color: Color.White,
             x: engine.drawWidth / 2 - 160,
             y: engine.drawHeight / 4,
-            text: "Circusres",
+            text: "Rescircus",
             font: new Font({
                 size: 75
             })

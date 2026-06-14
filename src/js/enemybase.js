@@ -12,6 +12,8 @@ export class Enemybase extends Actor {
         this.dying = false;
         this.scale.setTo(1.5, 1.5);
         this.facing = 1;
+
+
         // running animation
         this.EnemySheet = SpriteSheet.fromImageSource({
             image: Resources.EnemySheet,
@@ -58,10 +60,30 @@ export class Enemybase extends Actor {
         );
     }
 
-    onPreUpdate(engine) {
+    // onPreUpdate(engine) {
+    //     if (this.dying) return;
+    //     let direction = engine.currentScene.rabbit.pos.sub(this.pos).normalize();
+    //     this.vel = direction.scale(50);
+    //     this.graphics.flipHorizontal = (this.vel.x < 0);
+    // }
+
+    onPreUpdate(engine, delta) {
         if (this.dying) return;
-        let direction = engine.currentScene.rabbit.pos.sub(this.pos).normalize();
-        this.vel = direction.scale(50);
+
+        if (this.hitCooldown > 0) {
+            this.hitCooldown -= delta;
+        }
+
+        const rabbit = engine.currentScene.rabbit;
+        const distance = rabbit.pos.sub(this.pos).size;
+
+        if (distance > 80) {
+            let direction = rabbit.pos.sub(this.pos).normalize();
+            this.vel = direction.scale(50);
+        } else {
+            this.vel = new Vector(0, 0);
+        }
+
         this.graphics.flipHorizontal = (this.vel.x < 0);
     }
 
@@ -69,7 +91,7 @@ export class Enemybase extends Actor {
         if (other.owner instanceof Bullet && !this.dying) {
             this.dying = true;
             this.scene.score += 1;
-            this.graphics.use(this.deathAnimation, { offset: new Vector(0, -20) }); 
+            this.graphics.use(this.deathAnimation, { offset: new Vector(0, -20) });
             this.vel = new Vector(0, 0);
             setTimeout(() => {
                 this.kill();
