@@ -60,13 +60,7 @@ export class Enemybase extends Actor {
         );
     }
 
-    // onPreUpdate(engine) {
-    //     if (this.dying) return;
-    //     let direction = engine.currentScene.rabbit.pos.sub(this.pos).normalize();
-    //     this.vel = direction.scale(50);
-    //     this.graphics.flipHorizontal = (this.vel.x < 0);
-    // }
-
+   
     onPreUpdate(engine, delta) {
         if (this.dying) return;
 

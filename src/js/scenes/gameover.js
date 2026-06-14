@@ -1,4 +1,4 @@
-import { Scene, Label, Vector, Font, Color, Actor, Rectangle, CoordPlane, TextAlign } from "excalibur";
+import { Scene, Label, Vector, Font, Color, Actor, Rectangle, TextAlign } from "excalibur";
 
 export class GameOver extends Scene {
     onInitialize(engine) {
@@ -6,8 +6,7 @@ export class GameOver extends Scene {
             x: engine.drawWidth / 2,
             y: engine.drawHeight / 2,
             width: engine.drawWidth,
-            height: engine.drawHeight,
-            coordPlane: CoordPlane.Screen
+            height: engine.drawHeight
         });
         overlay.graphics.use(new Rectangle({
             width: engine.drawWidth,
@@ -21,30 +20,26 @@ export class GameOver extends Scene {
         const label = new Label({
             text: "Game Over",
             pos: new Vector(engine.drawWidth / 2, engine.drawHeight / 2 - 120),
-            font: new Font({ size: 64, color: Color.Red, textAlign: TextAlign.Center }),
-            coordPlane: CoordPlane.Screen
+            font: new Font({ size: 64, color: Color.Red, textAlign: TextAlign.Center })
         });
 
         const scoreLabel = new Label({
             text: "Score: " + score,
             pos: new Vector(engine.drawWidth / 2, engine.drawHeight / 2 - 30),
-            font: new Font({ size: 32, color: Color.White, textAlign: TextAlign.Center }),
-            coordPlane: CoordPlane.Screen
+            font: new Font({ size: 32, color: Color.White, textAlign: TextAlign.Center })
         });
 
         const highscoreLabel = new Label({
             text: "Highscore: " + highscore,
             pos: new Vector(engine.drawWidth / 2, engine.drawHeight / 2 + 30),
-            font: new Font({ size: 32, color: Color.Yellow, textAlign: TextAlign.Center }),
-            coordPlane: CoordPlane.Screen
+            font: new Font({ size: 32, color: Color.Yellow, textAlign: TextAlign.Center })
         });
 
         const btnBg = new Actor({
             x: engine.drawWidth / 2,
             y: engine.drawHeight / 2 + 120,
             width: 260,
-            height: 60,
-            coordPlane: CoordPlane.Screen
+            height: 60
         });
         btnBg.graphics.use(new Rectangle({
             width: 260,
@@ -55,8 +50,7 @@ export class GameOver extends Scene {
         const btn = new Label({
             text: "Terug naar menu",
             pos: new Vector(engine.drawWidth / 2, engine.drawHeight / 2 + 110),
-            font: new Font({ size: 24, color: Color.White, textAlign: TextAlign.Center }),
-            coordPlane: CoordPlane.Screen
+            font: new Font({ size: 24, color: Color.White, textAlign: TextAlign.Center })
         });
 
         btnBg.on("pointerdown", () => {
